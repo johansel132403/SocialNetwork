@@ -13,4 +13,4 @@ var Usuarios = schema({
 
 });
 
-module.export = mongoose.model('Usuario',Usuarios);
+module.exports = mongoose.model('Usuario',Usuarios);
