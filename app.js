@@ -10,6 +10,7 @@ var app = express();
 //Cargar alchivos
 
 var usuario_routing = require('./routing/Usuario.rauting');
+var follow_routing = require('./routing/Follow.routing');
 
 //Middlewer
 app.use(bodyparse.urlencoded({extended:false}));
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 //RUTAS
 app.use('/api',usuario_routing);
+app.use('/api',follow_routing);
 
 //IMPORTS
 
