@@ -1,4 +1,5 @@
 var User = require('../Model/Usuarios');
+var Follow = require('../Model/Follow');
 
 var bcrypt = require('bcrypt-nodejs');
 
@@ -102,7 +103,10 @@ let controllers = {
 
     //ESTE METODO ES PARA OBTENER UN USUARIO
 
-    getUsuarios: function(req, res){
+    getUsuarios: function(req, res){ 
+
+
+        var userId = req.userp.Sub;
 
         var paramsId = req.params.id;
 
@@ -111,17 +115,54 @@ let controllers = {
             if(error) return res.status(500).send({Mensaje:'Error Codigo #500'});
             
             response.Password = undefined;
-            return res.status(200).send({response});
+
+            console.log(response);
+
+            controllers.getFollow(userId,paramsId).then((value)=>{
+                return res.status(200).send({
+                    response,
+                    following: value.following,
+                    followed: value.followed
+                });
+            });
+
         });
 
-        //Aqui tenemos de obtener los follow para ver quienes no siguen y a quienes seguimos
+    },
+    
+    //Esto aqui nos ayuda a ver si un usuario en especifico lo estamos siguiendo  y a ver si el no esta siguiendo
+    //asi podemos saber y darle su FOLLOW ..
+    getFollow: async function(userId, paramsId){
+
+        try{
+
+            let following = await Follow.findOne({'Seguidor':userId, 'Siguiendono':paramsId}).exec().then((response)=>{
+                           return response;
+            });
+
+            let followed = await Follow.findOne({'Siguiendono':userId, 'Seguidor':paramsId}).exec().then((response)=>{
+                return response;
+            });
+            return {
+                following: following,
+                followed: followed
+            }
+        }
+        catch(e){
+             console.log(e);
+        };
+
     },
 
-
-    //Obtener usuarios paginados..
+    //Obtener todos los Usuarios registrado de la red, hacemos una peticion para obtener los fallow
     getMasUsuarios: function(req,res){
         
+        var userId = req.userp.Sub;
+        
         var page = 1;
+
+
+        console.log(userId);
 
         if(req.params.page){
             page = req.params.page;
@@ -134,23 +175,119 @@ let controllers = {
             if(err) return res.status(500).send({Mensajes:'Hay un error codigo 500'});
 
             if(!response) return res.status(404).send({Mensajes: 'Hay un error codigo 404'});
-
-
-
+            
             //Aqui tambien tenemos que llamar a los metodos follow..
             
-
-
-            return res.status(200).send({
-
-                // resultado..
-                response,
-                total,
-                page: Math.ceil(total/itemPerPage)
-
+            controllers.getBackUser(userId).then((value)=>{
+                
+                return res.status(200).send({
+                    // resultado..
+                    response,
+                    total,
+                    page: Math.ceil(total/itemPerPage),
+                    following: value.following,
+                    followed: value.followed
+    
+                })
             });
-        })
+        });
     },
+
+
+
+     getBackUser: async function(userId){
+
+        try{
+            
+            let following = await Follow.find({"Seguidor":userId}).exec().then((response)=>{
+               
+                var followArray= [];
+
+                response.forEach((value)=>{
+                    followArray.push(value.Siguiendono);
+                });
+                  return followArray; 
+            }); 
+
+            let followed = await Follow.find({'Siguiendono':userId}).exec().then((response)=>{
+
+                var followedArray = [];
+
+                response.forEach((value)=>{
+                    followedArray.push(value.Seguidor);
+                });
+                return followedArray;
+            });
+
+            return {
+                following:following,
+                followed: followed
+            }
+
+        }
+        catch(e){
+            console.log(e);
+        }
+
+     },
+
+
+     getcout: function(req,res){
+
+        let userId = req.userp.Sub;
+
+            console.log(userId);
+        if(req.params.id){
+            userId= req.params.id;
+        }
+
+        controllers.getCouts(userId).then((response)=>{
+
+            return res.status(200).send({response});
+        });
+
+
+     },
+
+
+     getCouts: async function(userId){
+
+        try{
+            
+            let Following =  await Follow.count({'Seguidor':userId}).exec().then((count)=>{
+
+                return count;
+            });
+
+            let Followed = await Follow.count({'Siguiendono':userId}).exec().then((count)=>{
+
+                return count; 
+            });
+
+            //Aqui tenemos que poner los count de las publicaciones..
+
+            return {
+                Following: Following,
+                Followed: Followed
+            }
+
+
+        }
+        catch(e){
+            console.log(e);
+        }
+
+     },
+
+
+
+
+
+
+
+
+
+
 
     UpdateUsuario: function(req,res){
 

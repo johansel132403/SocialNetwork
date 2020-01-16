@@ -17,12 +17,13 @@ var _multiparty = multiparty({uploadDir:'./upload'});
 
     routing.get('/home',controller.Home);
     routing.post('/registrase',controller.Registrarse);
-    routing.get('/getUser/:id',controller.getUsuarios);
-    routing.get('/getUsuarion/:page',controller.getMasUsuarios);
+    routing.get('/getUser/:id',middlewer.Authentication,controller.getUsuarios);
+    routing.get('/getUsuarion/:page?',middlewer.Authentication,controller.getMasUsuarios);
     routing.put('/update/:id',middlewer.Authentication,controller.UpdateUsuario);
     routing.post('/login',controller.login);
     routing.post('/uploadImagen/:id',[middlewer.Authentication,_multiparty],controller.uploadImagen);
     routing.get('/getImagen/:fileImagen',middlewer.Authentication,controller.getImagen);
+    routing.get('/getCount/:id?',middlewer.Authentication,controller.getcout);
 
 
 
