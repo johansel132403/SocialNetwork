@@ -6,7 +6,7 @@ var Publication = Schema({
 
     Text: String,
     Text_fecha: String,
-    FileImagem: String,
+    FileImagen: String,
     Usuario: {type: Schema.ObjectId, ref:'Usuario'}
 });
 

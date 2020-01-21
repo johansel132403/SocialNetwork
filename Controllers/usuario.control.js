@@ -458,11 +458,11 @@ let controllers = {
         var file_path = './upload/'+file_imagen;
 
 
-        console.log(file_path);
+       
 
         fs.exists(file_path,(exist)=>{
              
-            console.log(exist);
+          
             if(exist){
                
                 return res.sendFile(path.resolve(file_path));
