@@ -6,8 +6,9 @@ var Mensajes = Schema({
 
 Mensajes: String,
 Men_Fecha: String,
+viewed: String,
 Emisor: {type: Schema.ObjectId, ref:'Usuario'},
-Reseptor: { type: Schema.ObjectId,ref:'Usuario'}
+Receptor: { type: Schema.ObjectId,ref:'Usuario'}
 
 });
 
