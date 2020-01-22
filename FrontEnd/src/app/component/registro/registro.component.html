@@ -1,1 +1,58 @@
-<p>registro works!</p>
+<div class="col-lg-8">
+     <h1>{{title}}</h1>
+
+     <!--Codigo de alerta -->
+      <div class="alert alert-danger col-lg-7" *ngIf="status == 'false'" >
+          {{statuss}}
+      </div>
+
+      <div class="alert alert-success col-lg-7" *ngIf="status == 'true'">
+        {{statuss}}
+       </div>
+
+
+     <form #Formulario="ngForm" (ngSubmit)="onSumit(Formulario)"  class="col-lg-7">
+          
+        <p>
+            <label>Nombre</label>
+            <input type="text" name="Nombre" #Nombre="ngModel" [(ngModel)]="user.Nombre" class="form-control" required>
+            <span *ngIf="!Nombre.valid && Nombre.touched" [style.color]="['red']">
+               El campo Nombre esta vacio
+            </span>
+        </p>
+
+        <p>
+            <label>SubName</label>
+            <input type="text" name="SubName" #SubName="ngModel" [(ngModel)]="user.SubName" class="form-control" required>
+            <span *ngIf="!SubName.valid && SubName.touched" [style.color]="['red']">
+               El campo SubName esta vacio
+            </span>
+        </p>
+
+        <p>
+            <label>Nick</label>
+            <input type="text" name="Nick" #Nick="ngModel" [(ngModel)]="user.Nick" class="form-control" required>
+            <span *ngIf="!Nick.valid && Nick.touched" [style.color]="['red']">
+               El campo Nick esta vacio
+            </span>
+        </p>
+
+        <p>
+            <label>Email</label>
+            <input type="email" name="Email" #Email="ngModel" [(ngModel)]="user.Email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <span *ngIf="!Email.valid && Email.touched" [style.color]="['red']">
+                El campo Email esta vacio
+            </span>
+        </p>
+
+        <p>
+            <label>Contraseña</label>
+            <input type="password" autocomplete="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" class="form-control" required>
+            <span *ngIf="!Password.valid && Password.touched" [style.color]="['red']">
+                El campo Contraseña esta vacio
+            </span>
+        </p>
+
+        <input type="submit" class="btn btn-success" [disabled]="!Formulario.form.valid">
+     </form>
+</div>

@@ -55,11 +55,11 @@ let controllers = {
                 response.forEach((value)=>{
                     
                    if(value.Email.toLowerCase() == user.Email.toLowerCase()){
-                     error = 'El Email ya esta registrado';
+                     error = 'Error: Este Email ya esta registrado';
                    }
 
                    if(value.Nick.toLowerCase() == user.Nick.toLowerCase()){
-                      error = 'Error El Nick ya esta en uso';
+                      error = 'Error: Este Nick ya esta en uso';
                    }
 
                 });
@@ -82,7 +82,7 @@ let controllers = {
 
                         if(response){
 
-                            return res.status(200).send({Mensaje:response});
+                            return res.status(200).send({Registro:response});
                         }else{
                             return res.status(404).send({Mensaje:'Hay un error, Codigo #404'});
                         }
