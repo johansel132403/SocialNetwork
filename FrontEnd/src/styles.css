@@ -43,3 +43,42 @@
 .navigation .navbar .dropdown-menu a:hover{
     background: #eee !important;
 }
+
+
+/*Users's Imagen*/
+
+.item-user .imagen_user{
+    width: 75px;
+    height: 75PX;
+    overflow:hidden;
+    border-radius: 100%;
+    margin-right:10px;
+    margin-top:9px
+}
+
+.item-user .imagen_user img{
+       height: auto;
+       width:75px;
+}
+
+.user_name{
+    margin-top: 20px;
+
+}
+
+.user_name p{
+    margin:0px;
+}
+
+.item-user .user_name .nickname{
+    color:#969393;
+}
+
+.item-user .user_name .subname a {
+    color:rgb(102, 95, 95);
+    font-weight: bold;
+}
+
+.pull-right button{
+    margin-top:25px;
+}

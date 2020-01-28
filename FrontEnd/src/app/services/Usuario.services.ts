@@ -80,4 +80,15 @@ export class UsuarioServices{
 
         return this._Http.get(this.url+'getUsuarion/'+page,{headers:headers});                               
     }
+
+    editUser(user:Usuario):Observable<any>{
+
+        let params = JSON.stringify(user);
+
+        let headers = new HttpHeaders().set('Content-type','application/json')
+                                       .set('authorization',this.getToken());
+      
+        return this._Http.put(this.url+'update/'+user._id,params,{headers: headers});                               
+
+    }
 }

@@ -22,7 +22,7 @@ var _multiparty = multiparty({uploadDir:'./upload'});
     routing.put('/update/:id',middlewer.Authentication,controller.UpdateUsuario);
     routing.post('/login',controller.login);
     routing.post('/uploadImagen/:id',[middlewer.Authentication,_multiparty],controller.uploadImagen);
-    routing.get('/getImagen/:fileImagen',middlewer.Authentication,controller.getImagen);
+    routing.get('/getImagen/:fileImagen',controller.getImagen);
     routing.get('/getCount/:id?',middlewer.Authentication,controller.getcout);
 
 

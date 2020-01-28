@@ -1,1 +1,51 @@
-<p>edit works!</p>
+
+<div class="col-lg-5">
+
+
+    <form #Formulario="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <p>
+            <label>Nombre</label>
+            <input type="text" name="Nombre" #Nombre="ngModel" [(ngModel)]="user.Nombre" class="form-control" required>
+            <span *ngIf="!Nombre.valid && Nombre.touched" [style.color]="['red']">
+                El campor Nombre esta vaico
+            </span>
+        </p>
+
+         <p>
+             <label>SubName</label>
+             <input type="text" name="SubName" #SubName="ngModel" [(ngModel)]="user.SubName" class="form-control" required>
+             <span *ngIf="!SubName.valid && SubName.touched" [style.color]="['red']">
+                 El campo SubName esta vacio
+             </span>
+         </p>   
+
+         <p>
+             <label>Nick</label>
+             <input type="text" name="Nick" #Nick="ngModel" [(ngModel)]="user.Nick" class="form-control" required>
+             <span *ngIf="!Nick.valid && Nick.touched" [style.color]="['red']">
+                 El campo Nick esta vacio
+             </span>
+         </p>
+
+         <p>
+             <label>Email</label>
+             <input type="email" name="Email" #Email="ngModel" [(ngModel)]="user.Email" class="form-control" required>
+             <span *ngIf="!Email.valid && Email.touched" [style.color]="['red']">
+                 El campo Email esta vacio
+             </span>
+         </p> 
+
+         <div class="user.Imagen">
+              <img src="{{url+'getImagen/'+user.Imagen}}" [style.width.px]="200" alt="">
+         </div>
+
+         <p>
+             <label>Imagen</label>
+             <input type="file" class="form-control" (change)="IploadFile($event)">
+         </p>
+
+         <p>
+             <input type="submit" class="btn btn-success" value="Actualizar" [disabled]="!Formulario.form.valid">
+         </p>
+    </form>
+</div>

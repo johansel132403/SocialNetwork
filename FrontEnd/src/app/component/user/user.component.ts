@@ -16,6 +16,7 @@ import { Follow } from 'src/app/model/Follow.model';
 export class UserComponent implements OnInit,DoCheck {
 
   public identity;
+  public url;
   public token;
   public user: Usuario[];
   public status;
@@ -35,9 +36,13 @@ export class UserComponent implements OnInit,DoCheck {
      private _router: Router,
      private _route: ActivatedRoute,
      private _FollowServices: FollowServices
-  ) { }
+  ) {
+    this.url = Global.url;
+   }
 
   ngOnInit() {
+
+    
     
     this.identity = this._UsuarioServices.getIdentity();
 
@@ -95,7 +100,7 @@ export class UserComponent implements OnInit,DoCheck {
 
             this.user = response.usuarios;
             this.following = response.following;
-            console.log(this.following);
+            console.log(this.user);
             this.pages = response.page;
 
             if(page > this.pages){

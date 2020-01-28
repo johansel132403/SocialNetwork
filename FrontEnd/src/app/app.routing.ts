@@ -29,6 +29,7 @@ const appRouter: Routes = [
     {path: 'login',component: LoginComponent},
     {path: 'registro',component: RegistroComponent},
     {path: 'perfil/:id',component: PerfilComponent},
+    {path: 'edit',component:EditComponent},
     {path: '**',component: ErrorComponent}
 
 

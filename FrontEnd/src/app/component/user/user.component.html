@@ -6,10 +6,10 @@
             <div class="panel panel-default">
                <div class="panel-body">
    
-                   <div>
+                   <div class="imagen_user pull-left">
                        <a href="#">
-                           <img src="" alt="">
-                           <img src="" alt="">
+                           <img src="{{url+'getImagen/'+users.Imagen}}" alt="" *ngIf="users.Imagen">
+                           <img src="assets/imagen/login.jpg" alt="" *ngIf="!users.Imagen">
                        </a>
                    </div>
    
