@@ -2,9 +2,9 @@
 let express  = require('express');
 
 
+var app = express();
 const bodyparse = require('body-parser');
 
-var app = express();
 
 
 //Cargar alchivos
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 });
+
 
 //RUTAS
 app.use('/api',usuario_routing);

@@ -45,6 +45,7 @@ export class RegistroComponent implements OnInit {
               setTimeout(()=>{
               
                 this.status = null;
+                this._router.navigate(['/login']);
                 
               },2700);
 

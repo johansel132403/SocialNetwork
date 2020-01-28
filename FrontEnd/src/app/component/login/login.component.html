@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="col-lg-7">
+
+    <div class="alert alert-danger col-lg-7" *ngIf="status == 'error'">
+        {{error}}
+    </div>
+
+    <form #Formulario="ngForm" (ngSubmit)="onSubmit(Formulario)" class="col-lg-6">
+        <p>
+            <label>Email</label>
+            <input class="form-control" type="Email" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <span *ngIf="!Email.valid && Email.touched" [style.color]="['red']">
+             El campo Email esta vacio
+            </span>
+        </p>
+        <p>
+            <label>Contraseña</label>
+            <input class="form-control" autocomplete="password" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required>
+            <span *ngIf="!Password.valid && Password.touched" [style.color]="['red']">
+                El campo Contraseña esta vacio
+            </span>
+        </p>
+     
+        <input  class="btn btn-success" type="submit" [disabled]="!Formulario.form.valid">
+    </form> 
+</div>

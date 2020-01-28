@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+.navigation{
+    
+    padding:0px !important;
+}
+
+.navigation .navbar{
+    border-radius: 0px !important;
+    background: rgb(197, 43, 43);
+    border:none;
+}
+
+.navigation .navbar *{
+    color: white !important;
+}
+
+.active{
+    background: rgb(160, 35, 35) !important;
+}
+
+.navigation .navbar a:hover{
+    background: rgb(160, 35, 35) !important;
+}
+
+.jumbotron{
+    text-align:center;
+    padding: 70px !important;
+    border-radius: 20px;
+}
+
+.jumbotron a{
+    margin-left:10px;
+}
+
+.navigation .navbar .dropdown-menu *{
+    color:black !important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+
+    background: rgb(160, 35, 35) !important;
+}
+
+.navigation .navbar .dropdown-menu a:hover{
+    background: #eee !important;
+}

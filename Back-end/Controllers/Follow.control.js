@@ -10,7 +10,7 @@ var controllerFollow = {
         var follow = new Follow();
 
         let subId = req.userp.Sub;
-        let params = req.params.followingUs;
+        let params = req.body.followingUs;
 
         follow.Seguidor = subId;
         follow.Siguiendono =  params;

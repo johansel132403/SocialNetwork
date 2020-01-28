@@ -7,11 +7,11 @@ const secret = 'Contrasena_que_no_se_puede_desifrar_por_nada';
 
 exports.Authentication = function(req,res,next){
 
-    if(!req.headers.auth){
+    if(!req.headers.authorization){
         return res.status(404).send({Mensaje: 'No esta autorizado, codigo 500, (Headers without auth)'});
     }
           
-    var token = req.headers.auth.replace(/['"]+/g,'');
+    var token = req.headers.authorization.replace(/['"]+/g,'');
 
     try{
 

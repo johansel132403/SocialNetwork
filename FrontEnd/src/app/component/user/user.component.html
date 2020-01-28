@@ -1,1 +1,63 @@
-<p>user works!</p>
+<div id="gente" class="col-lg-8">
+    <h1>{{title}}</h1>
+    
+    <div class="people">
+        <div *ngFor="let users of user" class="item-user" >
+            <div class="panel panel-default">
+               <div class="panel-body">
+   
+                   <div>
+                       <a href="#">
+                           <img src="" alt="">
+                           <img src="" alt="">
+                       </a>
+                   </div>
+   
+                   <div class="user_name pull-left">
+                        <p class="subname">
+                            <a href="#">
+                                {{users.Nombre+' '+users.SubName}}
+                            </a>
+                        </p>
+                        <p class="nick">
+                             {{users.Nick}}
+                        </p>
+                   </div>
+
+                   <div class="pull-right" *ngIf="users._id != identity._id">
+                       <button class="btn btn-defualt" *ngIf="following.indexOf(users._id) < 0"
+                       (click)="addFollow(users._id)">
+                       Seguir
+                       <span class="glyphicon glyphicon-ban-circle"></span>
+                       </button>
+
+                       <button class="btn btn-primary" *ngIf="following.indexOf(users._id) >= 0"
+                           (mouseenter)="mouseEnter(users._id)"
+                           (mouseleave)="mouseLeave(users._id)"
+                           [class.btn-danger]="users._id == follow"
+                           (click)="deleteFollow(users._id)">
+                           <span *ngIf="users._id == follow; else followss">
+                                Dejar de Seguier
+                           </span>
+                           
+                           <ng-template #followss>
+                               <span class="glyphicon glyphicon-heart"></span>
+                                Siguiendo
+                           </ng-template>
+
+
+                       </button>
+
+                   </div>
+   
+               </div>
+
+        </div>
+         </div>
+         <!--paginartion-->
+         <ul class="pagination pull-right">
+             <li *ngIf="page > 1"><a [routerLink]="['/gente',prev_page]">Anterior</a></li>
+             <li *ngIf="pages != page"><a [routerLink]="['/gente',next_page]">Siguiente</a></li>
+         </ul>
+    </div>
+</div>

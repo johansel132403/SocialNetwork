@@ -6,10 +6,10 @@
         <a href="#" class="navbar-brand">{{title}}</a>
        </div>
 
-       <ul class="nav navbar-nav">
+       <ul class="nav navbar-nav" *ngIf="identity">
 
             <li>
-              <a [routerLink]="['home']">
+              <a [routerLink]="['home']" [routerLinkActive]="['active']">
                 <span class="glyphicon glyphicon-home"></span>
                 Home
               </a>
@@ -30,7 +30,7 @@
             </li>
        </ul>
 
-       <ul class="nav navbar navbar-nav navbar-right">
+       <ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">
 
             <li>
               <a [routerLink]="['login']" [routerLinkActive]="['active']">
@@ -48,13 +48,47 @@
 
         </ul>
 
-       <!-- 
-       <ul class="nav navbar  navbar-nav navbar-rigth">
+        
+        <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+          
+             <li class="avatar">
+                <img src="" alt="">
+            </li>
 
-        li con la imagen del user
 
+             <li class="dropdown">
 
-       </ul> -->
+                  <a class="dropdown-toggl" data-toggle="dropdown" >
+                    {{identity.Nombre}} <span class="caret"></span>
+                  </a>
+                  
+                  <ul class="dropdown-menu">
+                     <li>
+                       <a [routerLink]="['/pefil']">
+                         <span class="glyphicon glyphicon-user">
+                          Perfil
+                         </span>
+                       </a>
+                     </li>
+
+                     <li>
+                       <a [routerLink]="['edit']">
+                         <span class="glyphicon glyphicon-cog">
+                           Datos
+                         </span>
+                       </a>
+                     </li>
+
+                     <li>
+                       <a [routerLink]="['home']" (click)="logout()">
+                         <span class="glyphicon glyphicon-log-out">
+                           Exit
+                         </span>
+                       </a>
+                     </li>
+                  </ul>
+            </li>
+       </ul>
      </div>
    </div>
  </div>

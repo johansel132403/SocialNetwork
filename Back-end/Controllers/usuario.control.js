@@ -161,20 +161,30 @@ let controllers = {
         
         var page = 1;
 
-
-        console.log(userId);
-
         if(req.params.page){
             page = req.params.page;
         }
 
         var itemPerPage = 4;
 
-        User.find().sort('_id').select({'Password':0}).paginate(page,itemPerPage,(err,response,total) =>{
+
+
+       //$ne selects the documents where the value of the field is not equal to the specified value.
+       // This includes documents that do not contain the field.
+                            
+        User.find().where({"_id":{"$ne":req.userp.Sub}}).sort('_id').select({'Password':0}).paginate(page,itemPerPage,(err,usuarios,total) =>{
+
+           delete {_id:req.userp.Sub}
+                    
+    
+          console.log(req.userp.Sub);
+          console.log(usuarios);
+      
+         
 
             if(err) return res.status(500).send({Mensajes:'Hay un error codigo 500'});
 
-            if(!response) return res.status(404).send({Mensajes: 'Hay un error codigo 404'});
+            if(!usuarios) return res.status(404).send({Mensajes: 'Hay un error codigo 404'});
             
             //Aqui tambien tenemos que llamar a los metodos follow..
             
@@ -182,7 +192,7 @@ let controllers = {
                 
                 return res.status(200).send({
                     // resultado..
-                    response,
+                    usuarios,
                     total,
                     page: Math.ceil(total/itemPerPage),
                     following: value.following,
@@ -395,7 +405,7 @@ let controllers = {
             });
 
           }else{
-              return res.status(500).send({Mensaje:'Error este usuario No esta registrado'});
+              return res.status(500).send({Mensaje:'Error: Este usuario No esta registrado'});
           }
 
         });
