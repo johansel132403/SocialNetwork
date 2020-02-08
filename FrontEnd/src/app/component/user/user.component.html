@@ -1,13 +1,13 @@
 <div id="gente" class="col-lg-8">
     <h1>{{title}}</h1>
-    
+  
     <div class="people">
         <div *ngFor="let users of user" class="item-user" >
             <div class="panel panel-default">
                <div class="panel-body">
    
                    <div class="imagen_user pull-left">
-                       <a href="#">
+                       <a [routerLink]="['/perfil',users._id]">
                            <img src="{{url+'getImagen/'+users.Imagen}}" alt="" *ngIf="users.Imagen">
                            <img src="assets/imagen/login.jpg" alt="" *ngIf="!users.Imagen">
                        </a>
@@ -19,7 +19,7 @@
                                 {{users.Nombre+' '+users.SubName}}
                             </a>
                         </p>
-                        <p class="nick">
+                        <p class="nickname">
                              {{users.Nick}}
                         </p>
                    </div>
@@ -28,7 +28,7 @@
                        <button class="btn btn-defualt" *ngIf="following.indexOf(users._id) < 0"
                        (click)="addFollow(users._id)">
                        Seguir
-                       <span class="glyphicon glyphicon-ban-circle"></span>
+                       <span class="glyphicon glyphicon-heart-empty"></span>
                        </button>
 
                        <button class="btn btn-primary" *ngIf="following.indexOf(users._id) >= 0"
@@ -60,4 +60,9 @@
              <li *ngIf="pages != page"><a [routerLink]="['/gente',next_page]">Siguiente</a></li>
          </ul>
     </div>
+</div>
+
+<div class="gente">
+     <app-sidebar></app-sidebar>
+
 </div>

@@ -3,7 +3,7 @@ export class Publicacion{
         public _id: String,
         public Text: String,
         public Text_fecha: String,
-        public FileImagen: String,
+        public Imagen: String,
         public Usuario: String
     ){}
 }

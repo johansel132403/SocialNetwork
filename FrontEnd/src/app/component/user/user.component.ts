@@ -140,6 +140,16 @@ export class UserComponent implements OnInit,DoCheck {
 
         if(response){
           this.following.push(followId);
+
+          this._UsuarioServices.getCount().subscribe(
+            response=>{
+              localStorage.setItem('count',JSON.stringify(response.response));
+            },
+            error=>{
+              console.log(<any>error);
+            }
+
+          )
           
         }
 
@@ -162,9 +172,18 @@ export class UserComponent implements OnInit,DoCheck {
          
           this.following.splice(id,1);
 
-          console.log(id);
+          this._UsuarioServices.getCount().subscribe( 
+            response=>{
 
-          //Aqui tiene que ir un count.....
+              localStorage.setItem('count',JSON.stringify(response.response));
+
+             
+
+            },
+            error=>{
+               console.log(<any>error);
+            }
+          )
           
         }
        

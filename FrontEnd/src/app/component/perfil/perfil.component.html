@@ -1,1 +1,82 @@
-<p>perfil works!</p>
+<div class="col-lg-8">
+    <h1>{{title}}</h1>
+     <div id="perfil"  *ngIf="user">
+            <div class="avatar pull-left">
+               <img src="{{url+'getImagen/'+user.Imagen}}" *ngIf="user.Imagen" alt="">
+               <img src="assets/imagen/login.jpg" alt="" *ngIf="!user.Imagen">
+            </div>
+
+            <div class="user-name">
+                <p class="name" [style.top.px]="['36']">{{user.Nombre+' '+user.SubName}}</p>
+                <p class="nick">{{user.Nick}}</p>
+            </div>
+
+            <div class="follow pull-left">
+                    <div class="label o label-default pull-left" *ngIf="followed">
+                        Te Sigue
+                    </div>
+
+                    <button class="btn btn-success" *ngIf="!following" (click)="addFollow(user._id)">
+                      Seguir
+                    </button>
+
+                    <button class="btn btn-primary" *ngIf="following" (click)="deleteFollow(user._id)" (mouseenter)="mouseEnter(user._id)" (mouseleave)="mouserLeave(user._id)"
+                    [class.btn-danger]="user._id == overButton">
+
+                    <span *ngIf="user._id == overButton;else following">
+                        Dejar de Seguir
+                    </span>
+
+                    <ng-template #following>
+                        Siguiendo
+                    </ng-template>
+
+                    </button>
+            </div>
+
+            <div class="stats" *ngIf="stats">
+                  <div class="following-data">
+                    <a [routerLink]="['/perfil']">
+                        <span class="label-stats">
+                            Following
+                        </span>
+                        <span class="number-stats">
+                            {{stats.response.Following}}
+                        </span>
+                    </a>
+                  </div>
+
+                  <div class="following-data">
+                    <a [routerLink]="['/perfil']">
+                        <span class="label-stats">
+                          Followed
+                        </span>
+                        <span class="number-stats">
+                           {{stats.response.Followed}}
+                        </span>
+                    </a>
+                  </div>
+
+                  <div class="following-data">
+                      <a [routerLink]="['ddd']">
+                          <span class="label-stats">
+                            Publication
+                          </span>
+                          <span class="number-stats">
+                            {{stats.response.publication}}
+                          </span>
+                      </a>
+                  </div>
+
+            </div>
+            <div class="col-lg-12" [style.marginTop.px]="['27']" *ngIf="user">
+                  <app-publication [userId]="user._id"></app-publication>
+            </div>
+     </div>
+
+
+</div>
+
+<div class="gente">
+  <app-sidebar></app-sidebar>
+</div>

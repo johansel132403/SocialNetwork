@@ -5,6 +5,8 @@ import { Global } from '../services/Global';
 import { Usuario } from '../model/Usuarios.model';
 
 
+
+
 @Injectable()
 
 export class UsuarioServices{
@@ -12,6 +14,8 @@ export class UsuarioServices{
     public url: String;
     public identity;
     public token;
+    public count;
+    public contPerfil;
 
         constructor(
             private _Http: HttpClient
@@ -81,6 +85,30 @@ export class UsuarioServices{
         return this._Http.get(this.url+'getUsuarion/'+page,{headers:headers});                               
     }
 
+
+    getStat(){
+        let count = JSON.parse(localStorage.getItem('count'));
+
+        if(count != null){
+           this.count = count;
+        }else{
+            this.count = null;
+        }
+        return this.count;
+    }
+
+    getCountPerfil(){
+        let count = JSON.parse(localStorage.getItem('CountPerfil'));
+
+        if(count != null){
+            this.contPerfil = count;
+        }else{
+            this.contPerfil = null;
+        }
+        return this.contPerfil;
+    }
+
+
     editUser(user:Usuario):Observable<any>{
 
         let params = JSON.stringify(user);
@@ -90,5 +118,28 @@ export class UsuarioServices{
       
         return this._Http.put(this.url+'update/'+user._id,params,{headers: headers});                               
 
+    }
+
+    getOneUser(id):Observable<any>{
+
+        let headers = new HttpHeaders().set('Content-type','application/json')
+                                       .set('authorization',this.getToken());
+
+        return this._Http.get(this.url+'getUser/'+id,{headers:headers});                               
+    }
+
+    getCount(id = null):Observable<any>{
+
+        let headers = new HttpHeaders().set('Content-type','application/json')
+                                       .set('authorization',this.getToken());
+
+        if(id != null){
+          
+             
+            return this._Http.get(this.url+'getCount/'+id,{headers:headers});                                 
+
+        }else{
+            return this._Http.get(this.url+'getCount',{headers:headers});   
+        }                              
     }
 }

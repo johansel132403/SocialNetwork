@@ -1,6 +1,8 @@
 var User = require('../Model/Usuarios');
 var Follow = require('../Model/Follow');
 
+var Public = require('../Model/Publication');
+
 var bcrypt = require('bcrypt-nodejs');
 
 var jwt = require('jwt-simple');
@@ -246,7 +248,7 @@ let controllers = {
 
         let userId = req.userp.Sub;
 
-            console.log(userId);
+        
         if(req.params.id){
             userId= req.params.id;
         }
@@ -276,9 +278,14 @@ let controllers = {
 
             //Aqui tenemos que poner los count de las publicaciones..
 
+            let publication = await Public.count({'Usuario':userId}).exec().then((count)=>{
+                return count;
+            });
+
             return {
                 Following: Following,
-                Followed: Followed
+                Followed: Followed,
+                publication: publication
             }
 
 
@@ -428,7 +435,8 @@ let controllers = {
 
             var file_formato = file_name.split('\.');
             var formato = file_formato[file_formato.length -1];
-
+ 
+                console.log(formato);
 
             if(formato == 'png' || formato == 'PNG' || formato == 'GIF' || formato == 'gif' || formato == 'JPG' || formato == 'jpg' || formato == 'JPGE' || formato == 'jpge'){
 

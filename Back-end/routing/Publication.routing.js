@@ -17,8 +17,9 @@ routing.get('/getPubliPersonal/:id?/:page?',middlewer.Authentication,controller.
 routing.get('/getOnlyP/:id',middlewer.Authentication,controller.getOnlyP);
 routing.delete('/deleteP/:id',middlewer.Authentication,controller.deletePublic);
 
-routing.post('/updateImagen/:id',[middlewer.Authentication,multiparty],controller.UpdateImagen);
+routing.post('/updateImageen/:id',[middlewer.Authentication,multiparty],controller.UpdateImagen);
 routing.get('/getImg/:Imagen',controller.getImagen);
+routing.get('/loco',controller.algolo);
 
 
 

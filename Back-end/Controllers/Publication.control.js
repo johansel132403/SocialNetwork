@@ -11,7 +11,7 @@ let path = require('path');
 
 let Publicaciones = {
 
-
+// aqui cambiel la variable del mode FileImagen por Imagen
     savePublic: function(req,res){
         let userId = req.userp.Sub;
         let body = req.body;
@@ -22,7 +22,7 @@ let Publicaciones = {
 
         public.Text = body.Text;
         public.Text_fecha =  moment().unix();
-        public.FileImagen = null;
+        public.Imagen = null;
         public.Usuario = userId;
 
         public.save((err,response)=>{
@@ -139,17 +139,40 @@ let Publicaciones = {
     deletePublic: function(req,res){
       
         let paramsId = req.params.id;
-       
+        
         Publication.find({'Usuario':req.userp.Sub, '_id':paramsId}).remove((err,response)=>{
             console.log(response); 
-
+            
+            
             if(err) return res.status(500).send({Mensaje:'Error codigo 404'});
-
+            
             if(response.deletedCount == 0) return res.status(404).send({Mensaje:'Error: No se puede eliminar la publicacion..'});
-
+            
             return res.status(200).send({Mensaje:'Publicacion eliminada'});
         });
+
+    
     },
+    
+    algolo(){
+
+        //esto lo estoy haciendo yo tratando de ver como se puede actualizar la base de dato cuando una colletion se aya actualizado 
+        //estamos viendo con el strigger o Change Streams, ( cuando borramos a un perfil que la actualizacion la pueda ver el perfil que se a borrado).....
+        
+        var MongoClient = require('mongodb').MongoClient;
+        MongoClient.connect("mongodb://localhost:27017/Social-Network")
+         .then(function(client){
+           let db = client.db('Social-Network')
+    
+           let change_streams = db.collection('Publication').watch().forEach(printBlock)
+             
+                  console.log(printBlock)
+              
+          });
+      
+    },
+
+   
 
 
 
@@ -157,14 +180,16 @@ let Publicaciones = {
 
      UpdateImagen: function(req,res){
 
-         let userId = req.userp.Sub;
-
-         let paramsId =req.params.id;
-
-
-        if(req.files.FileImagen){
          
-            let  file_path = req.files.FileImagen.path;
+         
+         
+         
+         if(req.files.Imagen){
+           
+   
+            let paramsId =req.params.id;
+         
+            let  file_path = req.files.Imagen.path;
             let file_split = file_path.split('\\');
             let file_name = file_split[file_split.length -1];
 
@@ -172,16 +197,18 @@ let Publicaciones = {
             let formato = file_format[file_format.length -1];
 
 
+            console.log(file_name);
 
             if(formato == 'PNG' || formato == 'png' || formato == 'GIF'|| formato == 'gif'|| formato == 'JPG' || formato == 'jpg'|| formato == 'jpeg' || formato == 'JPEG'){
 
-                Publication.findOne({'Usuario':userId, '_id':paramsId}).exec((err,response)=>{
+                Publication.findOne({Usuario:req.userp.Sub, _id:paramsId}).exec((err,response)=>{
                     
                     if(err) return res.status(500).send({Mensaje:'Error codigo 500'});
 
+                   
                     if(response){
 
-                        Publication.findByIdAndUpdate(paramsId,{FileImagen:file_name}, {new:true},(err,response)=>{
+                        Publication.findByIdAndUpdate(paramsId,{Imagen:file_name}, {new:true},(err,response)=>{
                             
                             if(err) return res.status(500).send({Mensaje:'Error codigo 500'});
 
