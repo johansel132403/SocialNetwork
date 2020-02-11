@@ -216,7 +216,22 @@ var controllerFollow = {
                                 return res.status(404).send({Mensajes:'Error no se puede obtener nada'});
                             }
 
-                            return res.status(200).send({response});
+
+                            //esto es para verificar los Id de los usuarios que sigo, de esta forma estan mas organizados 
+                            // y puedo compararlo en el frontend con los seguidores de los perfiles que sigo
+
+                            let arrayId =[];
+                            let arrayId02 = [];
+                            response.forEach((value)=>{
+                              arrayId.push(value.Siguiendono._id);
+                              arrayId02.push(value);
+                            });
+
+                            return res.status(200).send({
+                               arrayId,
+                               arrayId02
+                               
+                            });
                         });
             }
 }

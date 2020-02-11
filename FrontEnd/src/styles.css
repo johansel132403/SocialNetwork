@@ -167,6 +167,10 @@
   margin-top:-20px !important;
 }
 
+#gente{
+    height: 500px;
+}
+
 input[type='submit']{
     margin-bottom: 10px;
 }
@@ -244,4 +248,16 @@ input[type='submit']{
     margin-left:337px;
     padding-left: 20px;
     height: 118px;
+}
+
+.NoUser{
+    position: relative;
+    display: block;
+    font-size: 30px;
+    margin: 200px auto;
+    width: 300px;
+    padding:10px;
+    border: 1px solid #555;
+    text-align: center;
+    
 }

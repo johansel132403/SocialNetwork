@@ -42,5 +42,39 @@ export class FollowServices{
          return this._http.delete(this.url+'deleteFollow/'+id,{headers: headers})                                 
        }
 
+       getFollowed(id,page):Observable<any>{
+
+         let headers = new HttpHeaders().set('Content-type','application/json')
+                                        .set('authorization',this.getToken());
+
+          return this._http.get(this.url+'getUsFollow/'+id+'/'+page,{headers:headers});                               
+
+
+       }
+
+       getOwnFollow(follow = false):Observable<any>{
+
+      
+
+         let headers = new HttpHeaders().set('Content-type','application/json')
+                                        .set('authorization',this.getToken());
+        
+         return this._http.get(this.url+'getOnlyFollow',{headers: headers});                               
+
+      }
+
+      getUsFollow(userId,page = null):Observable<any>{
+
+         if(!page){
+            page = 1;
+         }
+
+         let headers = new HttpHeaders().set('Content-type','application/json')
+                                        .set('authorization',this.getToken());
+
+         return this._http.get(this.url+'getFollow/'+userId+'/'+page,{headers:headers});                               
+         
+      }
+
 
 }

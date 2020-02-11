@@ -1,1 +1,82 @@
-<p>followed works!</p>
+<div id="gente" class="col-lg-8">
+   <h1>Uss-Followed</h1>
+
+   <div class="people">
+         
+       <!--Listado-->
+       <div *ngFor="let followor of followed" class="item-user">
+             <div class="panel panel-default">
+                 <div class="panel-body">
+                    <a href="#">
+                        <div class="image_user pull-left">
+                          <a [routerLink]="['/perfil',followor.Seguidor._id]">
+                              <img src="{{url+'getImagen/'+followor.Seguidor.Imagen}}" *ngIf="followor.Seguidor.Imagen" alt="">
+                              <img src="assets/imagen/login.jpg" *ngIf="!followor.Seguidor.Imagen" alt="">
+                          </a>
+                        </div>
+
+                        <div class="user_name pull-left">
+                            <p class="subname">
+                                <a href="#">
+                                    <p>{{followor.Seguidor.Nombre+' '+followor.Seguidor.Nick}}</p>
+                                </a>
+                            </p>
+                            <p class="nickname">
+                               {{followor.Seguidor.Nick}}
+                            </p>
+
+                        </div>
+                    </a>
+
+                    <!--SEGUIR/DEJAR DE SEGUIR-->
+                   
+                    <div class="pull-right" *ngIf="followor.Seguidor._id != identity._id">
+                        <button class="btn btn-default" *ngIf="following.indexOf(followor.Seguidor._id) < 0"
+                        (click)="addFollow(followor.Seguidor._id)">
+                        <span class="glyphicon glyphicon-heart-empy"></span>
+                          Seguir
+                        </button>
+
+                    </div>
+
+
+
+
+                    <!--Esto aqui es para los bottones del los fallowers-->
+                    <div class="pull-right">
+                        <button class="btn btn-primary" *ngIf='following.indexOf(followor.Seguidor._id) >= 0'
+                            (mouseenter)="mouseEnter(followor.Seguidor._id)"
+                            (mouseleave)="mouseLeave(followor.Seguidor._id)"
+                            [class.btn-danger]="followor.Seguidor._id == follow"
+                            (click)="deleteFollow(followor.Seguidor._id)">
+
+                            <span *ngIf="followor.Seguidor._id == follow; else followingg">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Dejar de Seguir
+                            </span>
+
+                            <ng-template #followingg>
+                                <span class="glyphicon glyphicon-heart"></span>
+                                Siguiendo
+                            </ng-template>
+                        </button>
+
+                    </div>
+                 </div>
+
+             </div>
+       </div>
+
+       <!--Paginate-->
+       <ul class="pagination pull-right">
+
+        <li *ngIf='page > 1'><a [routerLink]="['/followed/',id,prev_page]">Anterios</a></li>
+        <li *ngIf='pages != page'><a [routerLink]="['/followed/',id,next_page]">Siguiendo</a></li>
+       </ul>
+   </div>
+</div>
+
+<div class="gente">
+   <app-sidebar></app-sidebar>
+
+</div>

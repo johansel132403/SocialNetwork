@@ -27,11 +27,12 @@
                     </h4>
                </div>
           </div>
-     </div>
+     </div> 
 
-     <div class="col-lg-12 text-center" *ngIf="publicacion && publicacion.length">
+     <div class="col-lg-12 text-center" *ngIf="publicacion && publicacion.length >= 4 ">
          <p>
-             <button class="btn btn-default" (click)='seeMore(g)' *ngIf="this.page != this.pages">
+             <button class="btn btn-default" (click)='seeMore(g)' *ngIf="this.pages >= 2 && page != pages">
+
                 ver mas publicacion
                 <span class="glyphicon glyphicon-chevron-down"></span>
              </button>

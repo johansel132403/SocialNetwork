@@ -36,32 +36,40 @@ export class PublicationComponent implements OnInit {
     this.url = Global.url;
     this.token = this._userServices.getToken();
     this.identity = this._userServices.getIdentity();
-    this.page = 1;
-   }
-
-  ngOnInit() {
-    this.getPublicacionPersonal(this.userId,this.page)
   }
+  
+  ngOnInit() {
+    this.page = 1;
+    
+    
+    this.getPublicacionPersonal(this.userId,this.page);
 
-  ngDoCheck(){
-
+    console.log(this.page)
+    console.log(this.pages)
+  }
+  
+  ngDoCheck(){ 
+    
     this.publicacion = JSON.parse(localStorage.getItem('public'));
     this.page = JSON.parse(localStorage.getItem('page'));
-
+    
     this.ii = JSON.parse(localStorage.getItem('ii'));
-
+    
   }
-
+  
   getPublicacionPersonal(id,page,edding = false){
-
+    
+   
     this._public.getOwnPublication(id, page,this.token).subscribe(
       response=>{
-
-        console.log(response);
+        
+          
         this.pages = response.page;
-
+        console.log('pagess',this.pages);
+        
         if(!edding){
           this.publicacion = response.response;
+          
 
         }else{
 
@@ -91,6 +99,7 @@ export class PublicationComponent implements OnInit {
     localStorage.removeItem('ii');
     localStorage.removeItem('page');
 
+    
     this.getPublicacionPersonal(userId,this.page);
 
   }

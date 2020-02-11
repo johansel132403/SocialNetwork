@@ -1,7 +1,7 @@
 <h2>Perfil</h2>
 
 <div id="user-card" class="col-lg-4 panel panell-default pull-left">
-    <a href="#">
+    <a [routerLink]="['/perfil',identity._id]">
         <div class="avatar pull-left">
            <img src="{{url+'getImagen/'+identity.Imagen}}" alt="" *ngIf="identity.Imagen">
            <img src="assets/imagen/login.jpg" alt="" *ngIf="!identity.Imagen">
@@ -22,7 +22,7 @@
 
     <div class="stats" *ngIf="stats">
         <div class="following-data">
-          <a href="#">
+          <a [routerLink]="['/following',identity._id,1]">
               <span class="label-stats">
                Siguiendo
               </span>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="following-data">
-            <a href="#">
+            <a [routerLink]="['/followed/',identity._id,1]">
                 <span class="label-stats">
                     Seguidor
                 </span>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="following-data">
-            <a href="#">
+            <a [routerLink]="['/perfil',identity._id]">
                 <span class="label-stats">
                  Publicacion
                 </span>

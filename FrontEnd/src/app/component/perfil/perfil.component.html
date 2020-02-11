@@ -36,7 +36,7 @@
 
             <div class="stats" *ngIf="stats">
                   <div class="following-data">
-                    <a [routerLink]="['/perfil']">
+                    <a [routerLink]="['/following',user._id, 1]">
                         <span class="label-stats">
                             Following
                         </span>
@@ -47,9 +47,9 @@
                   </div>
 
                   <div class="following-data">
-                    <a [routerLink]="['/perfil']">
+                    <a [routerLink]="['/followed/',user._id,1]">
                         <span class="label-stats">
-                          Followed
+                          Followres
                         </span>
                         <span class="number-stats">
                            {{stats.response.Followed}}
@@ -58,7 +58,7 @@
                   </div>
 
                   <div class="following-data">
-                      <a [routerLink]="['ddd']">
+                      <a [routerLink]="['/perfil',user._id]">
                           <span class="label-stats">
                             Publication
                           </span>
