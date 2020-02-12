@@ -16,6 +16,7 @@ import { SendedComponent } from '../Mensajes/sended/sended.component';
 //app Routing
 import { MensajesRoutingModule } from '../Mensajes/mensajes.routing';
 
+//esteo es para la fecha... (de este module)
 import { MomentModule } from 'angular2-moment';
 
 @NgModule({

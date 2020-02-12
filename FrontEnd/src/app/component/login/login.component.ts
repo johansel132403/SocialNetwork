@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   public identity;
   public token;
  
-  
-
   constructor(
     private _UsuarioServis: UsuarioServices,
     private _router: Router,
@@ -41,10 +39,8 @@ export class LoginComponent implements OnInit {
   
   onSubmit(form){
     
-    
     this._UsuarioServis.login(this.user).subscribe(
       response=>{
-        
         
         this.identity = response.users;
         localStorage.setItem('identity',JSON.stringify(this.identity));
@@ -78,13 +74,9 @@ export class LoginComponent implements OnInit {
         
       }
       
-      
-      
       getCountt(){
         this._UsuarioServis.getCount().subscribe(
           response=>{
-            
-            
             localStorage.setItem('count',JSON.stringify(response.response));
             this._time.getPublic(1);
             

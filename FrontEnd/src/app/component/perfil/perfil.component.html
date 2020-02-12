@@ -70,6 +70,8 @@
 
             </div>
             <div class="col-lg-12" [style.marginTop.px]="['27']" *ngIf="user">
+
+                 <!--aqui le pasamos el Id  por un input-->
                   <app-publication [userId]="user._id"></app-publication>
             </div>
      </div>

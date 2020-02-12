@@ -7,12 +7,7 @@ import { UsuarioServices } from '../../services/Usuario.services';
 import { PublicServices } from '../../services/Publication.services';
 
 
-
-
-
-
 declare var $: any;
-
 
 @Component({
   selector: 'app-timeline',
@@ -47,16 +42,12 @@ export class TimelineComponent implements OnInit,DoCheck {
   ngOnInit() {
 
     this.getPublic(this.page);
-
   }
 
   ngDoCheck(){
-
   }
 
    getPublic(page, edding = false){
-
-    console.log('asi',page);
 
     this._PublicServices.getPublications(page,this.token).subscribe(
       response=>{
@@ -64,8 +55,6 @@ export class TimelineComponent implements OnInit,DoCheck {
         this.total = response.total;
         this.pages = response.page;
 
-       
-          console.log('asdfasdf',response)
         
         if(!edding){
           this.Publication = response.Publication;
@@ -78,8 +67,8 @@ export class TimelineComponent implements OnInit,DoCheck {
           
           this.Publication = arrA.concat(arrB);
           
-          console.log('df',this.Publication);
-
+          
+            // estoy permite que scroll tenga una animacion al momento de darle asi abajo..
           $("html, body").animate({scrollTop: $('body').prop('scrollHeight')},500);
         }
 
@@ -92,7 +81,7 @@ export class TimelineComponent implements OnInit,DoCheck {
    }
 
    public nmore = false;
-
+  // este metodo es para el button 
    seeMore(){
      this.page += 1;
      if(this.page == this.pages){
@@ -101,10 +90,14 @@ export class TimelineComponent implements OnInit,DoCheck {
      this.getPublic(this.page,true);
    }
 
+
+   //ESTE METODO SE LLAMA DESDE EL SIDEBAR CON UN  -> @Output() sended = new EventEmitter();
    refrez(event = null){                     // aqui le puse un null, por si da problema
    
     this.getPublic(1);
   }
+
+
 
   public ShowImagen;
   showImage(userId){

@@ -51,7 +51,7 @@ export class AddComponent implements OnInit {
       response=>{
 
         this.follow = response.arrayId02;
-        console.log(response);
+       
       },
       error=>{
         console.log(<any>error);
@@ -61,10 +61,10 @@ export class AddComponent implements OnInit {
 
 
   onSubmit(form){
-    console.log(this.mensajes);
+    
     this._mensajes.addMensajes(this.mensajes,this.token).subscribe(
       response=>{
-        console.log(response);
+       
         form.reset();
       },
       error=>{

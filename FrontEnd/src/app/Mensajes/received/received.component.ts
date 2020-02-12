@@ -82,7 +82,7 @@ export class ReceivedComponent implements OnInit {
       response=>{
         this.mensajesRes = response.response;
         this.pages = response.page;
-        console.log(this.mensajesRes);
+      
       },
       error=>{
         console.log(<any>error);

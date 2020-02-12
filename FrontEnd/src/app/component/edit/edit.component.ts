@@ -70,6 +70,7 @@ export class EditComponent implements OnInit {
 
   }
 
+  // AL FileUpload le pasamos el chenge que se hace en el file del Html para pasarlo a la subida de archivo..
   IploadFile(inputFile:any){
     console.log(inputFile.target.files);
 

@@ -100,12 +100,9 @@ export class FollowingComponent implements OnInit {
         console.log(<any>error);
       }
     )
-    
-    
 
     this._followServices.getUsFollow(userId,page).subscribe(
       response=>{
-        
         
         if(!response){
           
@@ -127,16 +124,12 @@ export class FollowingComponent implements OnInit {
           console.log(<any>error);
         }
       )
-
   }
 
   // bueno me quede en la parte de los follow, al paracer hay algunos que no quieren ser agragado
 
-
   addFollow(followId){
 
- 
-   
     this.Follow = new Follow('',this.identity._id,followId);
     
     this._followServices.addFollow(this.Follow).subscribe(
@@ -144,7 +137,6 @@ export class FollowingComponent implements OnInit {
 
         this._userServices.getCount().subscribe(
           response=>{
-
                 this.following.push(followId);
                 
                 localStorage.setItem('count',JSON.stringify(response.response));
@@ -156,7 +148,6 @@ export class FollowingComponent implements OnInit {
           }
           
           )
-
        
       },
       error=>{
@@ -181,12 +172,10 @@ export class FollowingComponent implements OnInit {
    this._followServices.deleteFollow(id).subscribe(
      response=>{
 
-     
       if(response){
     
         this._userServices.getCount().subscribe(
           response=>{
-
 
             var seach = this.following.indexOf(id);
 
@@ -195,8 +184,6 @@ export class FollowingComponent implements OnInit {
               
               this._getcount.resetCount();
               localStorage.setItem('count',JSON.stringify(response.response));
-        
-             
 
             }
 

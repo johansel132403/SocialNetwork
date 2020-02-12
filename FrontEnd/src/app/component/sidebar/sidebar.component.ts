@@ -20,6 +20,7 @@ import { PublicServices } from '../../services/Publication.services';
 })
 export class SidebarComponent implements OnInit,DoCheck {
 
+  //Con esto podemos ver lo que tiene el file.. y poder hacer un clearInputFile pero ya lo estamos haciendo de otra forma..
   @ViewChild('inputFile',{static: false}) input :ElementRef;
 
 
@@ -84,6 +85,8 @@ export class SidebarComponent implements OnInit,DoCheck {
               
               form.reset();
               this._roter.navigate(['/timeline']);
+               //Lo que estamos haciendo aqui es actualizar las publicacion por medio de un @Output..para que cuando agraguemos una 
+               //nueva actualizacion la publicaciones se actualizen.. 
               this.sended.emit({status:'true'});
               //clear inputFile...
               document.querySelector<HTMLInputElement>("#uploadCaptureFile").value ='';
@@ -95,13 +98,14 @@ export class SidebarComponent implements OnInit,DoCheck {
             form.reset();
           }
 
-
           this._UsuariosServices.getCount().subscribe(
             response=>{
 
               localStorage.setItem('count',JSON.stringify(response.response));
               this._roter.navigate(['/timeline']);
              
+               //Lo que estamos haciendo aqui es actualizar las publicacion por medio de un @Output..para que cuando agraguemos una 
+               //nueva actualizacion la publicaciones se actualizen.. 
               this.sended.emit({status:'true'});
 
             },
@@ -119,7 +123,7 @@ export class SidebarComponent implements OnInit,DoCheck {
     )
   }
 
-
+  // para pasar un valor por medio del HTML..
   @Output() sended = new EventEmitter();
 
 

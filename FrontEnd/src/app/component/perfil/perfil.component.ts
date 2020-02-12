@@ -79,18 +79,19 @@ export class PerfilComponent implements OnInit,DoCheck {
         if(response.response){
           this.user = response.response;
 
+          // Este metodo lo llamamos desde la publicaciones para borrar el localstorage de page y ii ..
           this._public.clearVar(this.user._id);
 
         }else{
           this.status = 'Error..';
         }
 
+        //Estos 2 if, es para el button de si nos siguen..
         if(response.following && response.following._id){
            this.following = true;
         }else{
           this.following = false;
         }
-
 
         if(response.followed && response.followed._id){
           this.followed = true;
@@ -109,10 +110,7 @@ export class PerfilComponent implements OnInit,DoCheck {
 
     this._UsuarioServices.getCount(id).subscribe(
       response=>{
-
         this.stats = response.response;
-      
-       
         localStorage.setItem('CountPerfil',JSON.stringify(response));
       },
       error=>{
@@ -188,8 +186,6 @@ export class PerfilComponent implements OnInit,DoCheck {
           )
           this.following = false;
 
-
-
       },
       error=>{
         console.log(<any>error);
@@ -198,7 +194,7 @@ export class PerfilComponent implements OnInit,DoCheck {
   }
 
   public overButton;
-
+// Estos son para podificar button..
   mouseEnter(userId){
      this.overButton = userId;
   }

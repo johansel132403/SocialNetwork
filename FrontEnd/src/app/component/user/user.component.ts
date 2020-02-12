@@ -41,21 +41,13 @@ export class UserComponent implements OnInit,DoCheck {
    }
 
   ngOnInit() {
-
-    
-    
     this.identity = this._UsuarioServices.getIdentity();
 
     this.actualpage();
 
-    
   }
   ngDoCheck(){
-
-
-
   }
-  
   
   actualpage(){
     
@@ -79,8 +71,9 @@ export class UserComponent implements OnInit,DoCheck {
         if(this.prev_page <= 0){
            this.prev_page = 1;
         }
+           
            this.getusersss(page);
-        }
+      }
         
         );
         
@@ -99,15 +92,15 @@ export class UserComponent implements OnInit,DoCheck {
           }else{
 
             this.user = response.usuarios;
+            //aqui obtenemos los que seguimos ..
             this.following = response.following;
-            console.log(this.user);
+            
             this.pages = response.page;
 
             if(page > this.pages){
               this._router.navigate(['/gente',1]);
             }
           }
-          
           
       },
           error=>{
@@ -122,6 +115,7 @@ export class UserComponent implements OnInit,DoCheck {
 
   }
 
+  //Estos metodos son para los button
   mouseEnter(userId){
       this.follow = userId;
   }
@@ -139,6 +133,7 @@ export class UserComponent implements OnInit,DoCheck {
        response=>{
 
         if(response){
+          //aqui hacemos este push para entrar a los nuevos que vamos a seguir
           this.following.push(followId);
 
           this._UsuarioServices.getCount().subscribe(

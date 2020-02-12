@@ -40,12 +40,8 @@ export class PublicationComponent implements OnInit {
   
   ngOnInit() {
     this.page = 1;
-    
-    
     this.getPublicacionPersonal(this.userId,this.page);
-
-    console.log(this.page)
-    console.log(this.pages)
+   
   }
   
   ngDoCheck(){ 
@@ -58,19 +54,16 @@ export class PublicationComponent implements OnInit {
   }
   
   getPublicacionPersonal(id,page,edding = false){
-    
    
     this._public.getOwnPublication(id, page,this.token).subscribe(
       response=>{
         
           
         this.pages = response.page;
-        console.log('pagess',this.pages);
         
         if(!edding){
           this.publicacion = response.response;
           
-
         }else{
 
           var arrayA = this.publicacion;
@@ -91,9 +84,6 @@ export class PublicationComponent implements OnInit {
 
   }
 
-
-
-
   clearVar(userId){
 
     localStorage.removeItem('ii');
@@ -103,12 +93,6 @@ export class PublicationComponent implements OnInit {
     this.getPublicacionPersonal(userId,this.page);
 
   }
-
-
-
-
-
-
 
   public nmore = false;
   public ii = 1;

@@ -73,7 +73,6 @@ export class FollowedComponent implements OnInit {
           if(this.prev_page <= 0){
 
             this.prev_page =1;
-
           }
 
           this.getFollowing(userId, page);
@@ -82,18 +81,10 @@ export class FollowedComponent implements OnInit {
     )
   }
 
-
-
     getFollowing(userId,page){
       this._followServices.getOwnFollow().subscribe(
         response=>{
-          
-
-          
-          
           this.following = response.arrayId;
-      
-         
 
         },
         error=>{
@@ -116,15 +107,11 @@ export class FollowedComponent implements OnInit {
             this.followed = response.response;
             // Este petodo es para mostrarno a lo que seguimos y de esa forma, cuando veamos los seguidores de la demas persona
             //podemos ver di tambien nosotros los seguimos a ellos..
-       
 
             if(page > this.pages){
               this._router.navigate(['/followed/',userId,1]);
             }
           }
-
-
-
        
         },
         error=>{
@@ -134,12 +121,8 @@ export class FollowedComponent implements OnInit {
 
   }
 
-  // bueno me quede en la parte de los follow, al paracer hay algunos que no quieren ser agragado
-
-
+  //AQUI ADD UN FOLLOW...
   addFollow(followId){
-
- 
    
     this.Follow = new Follow('',this.identity._id,followId);
     
@@ -148,20 +131,16 @@ export class FollowedComponent implements OnInit {
 
         this._userServices.getCount().subscribe(
           response=>{
-
             
                 this.following.push(followId);
-                
                 localStorage.setItem('count',JSON.stringify(response.response));
                 this._getcount.resetCount();
-
           },
           error=>{
             console.log(<any>error);
           }
           
           )
-
        
       },
       error=>{
@@ -171,6 +150,7 @@ export class FollowedComponent implements OnInit {
     )
   }
 
+  // Estos metodos son para los botton
   public follow;
   mouseLeave(id){
    this.follow = 0;
@@ -180,19 +160,20 @@ export class FollowedComponent implements OnInit {
     this.follow = id;
   }
 
+  //ESTE METODO ES PARA BORRAR UN FOLLOW..
   deleteFollow(id){
 
 
    this._followServices.deleteFollow(id).subscribe(
      response=>{
 
-     
       if(response){
     
         this._userServices.getCount().subscribe(
           response=>{
 
-
+               //aqui lo que estamos haciendo es verificando si en el array following esta el id que no estan pasando
+               // si es verdadero lo borramos con splice
             var seach = this.following.indexOf(id);
 
             if(seach){
@@ -200,8 +181,6 @@ export class FollowedComponent implements OnInit {
               
               this._getcount.resetCount();
               localStorage.setItem('count',JSON.stringify(response.response));
-        
-             
 
             }
 

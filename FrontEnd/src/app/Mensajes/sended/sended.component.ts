@@ -77,7 +77,7 @@ export class SendedComponent implements OnInit {
 
         this.mensaje = response.response;
         this.pages = response.page;
-        console.log(response);
+       
       },
       error=>{
         console.log(<any>error);
