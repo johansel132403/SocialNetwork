@@ -18,21 +18,27 @@ import { FollowingComponent } from './component/following/following.component';
 import { EditComponent } from './component/edit/edit.component';
 
 
+//Esto es para proteger las Url.. 
+//Tienen que estar registrado para poder pasar a la pagina 
+import { SaveServices } from './services/SaveRed.serveces';
+
+//Este imoport es para que no podamos entrar al login una vez registrado..
+import { SaveLogin } from './services/SaveLogin.services';
 
 const appRouter: Routes = [
 
     {path: '',component: HomeComponent},
-    {path: 'home',component: HomeComponent},
-    {path: 'timeline',component: TimelineComponent},
-    {path: 'gente',component: UserComponent},
-    {path: 'gente/:page',component: UserComponent},
-    {path: 'login',component: LoginComponent},
+    {path: 'home',component: HomeComponent,canActivate:[SaveServices]},
+    {path: 'timeline',component: TimelineComponent,canActivate:[SaveServices]},
+    {path: 'gente',component: UserComponent,canActivate:[SaveServices]},
+    {path: 'gente/:page',component: UserComponent,canActivate:[SaveServices]},
+    {path: 'login',component: LoginComponent,canActivate:[SaveLogin]},
    // {path: 'following', component: FollowingComponent},
-    {path: 'following/:id/:page', component: FollowingComponent},
-    {path: 'followed/:id/:page',component:FollowedComponent},
+    {path: 'following/:id/:page', component: FollowingComponent,canActivate:[SaveServices]},
+    {path: 'followed/:id/:page',component:FollowedComponent,canActivate:[SaveServices]},
     {path: 'registro',component: RegistroComponent},
-    {path: 'perfil/:id',component: PerfilComponent},
-    {path: 'edit',component:EditComponent},
+    {path: 'perfil/:id',component: PerfilComponent,canActivate:[SaveServices]},
+    {path: 'edit',component:EditComponent,canActivate:[SaveServices]},
     {path: '**',component: ErrorComponent}
 
 

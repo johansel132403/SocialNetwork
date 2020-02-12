@@ -19,6 +19,11 @@ import { MomentModule } from 'angular2-moment';
 import {appRouterProvider, routing } from './app.routing';
 
 
+//Este es el module del module de mensajes el cual es importa aqui en el principar para poder 
+//usuarlo en toda la pagina..
+import { MensajesModule } from './Mensajes/mensajes.module';
+
+
 import { UserComponent } from './component/user/user.component';
 import { LoginComponent } from './component/login/login.component';
 import { PerfilComponent } from './component/perfil/perfil.component';
@@ -31,6 +36,19 @@ import { FollowedComponent } from './component/followed/followed.component';
 import { FollowingComponent } from './component/following/following.component';
 import { EditComponent } from './component/edit/edit.component';
 import { ErrorComponent } from './component/error/error.component';
+
+
+import { SaveLogin } from './services/SaveLogin.services';
+
+//Esto es para proteger las url 
+import { SaveServices } from './services/SaveRed.serveces';
+
+//ponemos el UsuarioServices en los providers para que a la hora de hacer la 
+//verificacion con el SaveServices no nos de problema, porque usamos el Identity que es de UsuarioServis en toda la url 
+//por eso hay que ponerla en el providers..
+import { UsuarioServices } from './services/Usuario.services';
+
+
 
 @NgModule({
   declarations: [
@@ -47,16 +65,21 @@ import { ErrorComponent } from './component/error/error.component';
     FollowingComponent,
     EditComponent,
     ErrorComponent
+    
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    MensajesModule
   ],
   providers: [
-    appRouterProvider
+    appRouterProvider,
+    SaveServices,
+    UsuarioServices,
+    SaveLogin
   ],
   bootstrap: [AppComponent]
 })

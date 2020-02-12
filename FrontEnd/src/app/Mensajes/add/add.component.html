@@ -1,0 +1,29 @@
+<div class="col-lg-10">
+    
+    <form #FormEnviar="ngForm" (ngSubmit)="onSubmit(FormEnviar)"> 
+
+        <p>
+            <label>Para:</label>
+            <!--Lista de seguidores-->
+
+            <!--Aqui tomamos el id del seguidor y lo pasamos al receptor -->
+            <select class="form-control" name="Receptor" #Receptor="ngModel" [(ngModel)]="mensajes.Receptor" required>
+                <option *ngFor="let value of follow" value="{{value.Seguidor._id}}">
+                    {{value.Seguidor.Nombre+'  ('+value.Seguidor.Nick+')'}}
+                </option>
+            </select>
+
+        </p>
+
+        <p>
+            <label>Mensajes</label>
+            <textarea class="form-control" name="Mensajes" #Mensajes="ngModel" [(ngModel)]="mensajes.Mensajes" required></textarea>
+                <span *ngIf="!Mensajes.valid && Mensajes.touched" [style.color]="['red']">
+                   El campo esta vacio! 
+                </span>
+        </p>
+
+         <input type="submit" class="btn btn-success" value="Enviar" [disabled]="!FormEnviar.form.valid">
+
+    </form>
+</div>

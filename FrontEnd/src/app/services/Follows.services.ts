@@ -54,12 +54,23 @@ export class FollowServices{
 
        getOwnFollow(follow = false):Observable<any>{
 
-      
+         
 
          let headers = new HttpHeaders().set('Content-type','application/json')
                                         .set('authorization',this.getToken());
         
          return this._http.get(this.url+'getOnlyFollow',{headers: headers});                               
+
+      }
+
+      getOwnFollow02(follow = true):Observable<any>{
+
+         
+
+         let headers = new HttpHeaders().set('Content-type','application/json')
+                                        .set('authorization',this.getToken());
+        
+         return this._http.get(this.url+'getOnlyFollow/'+follow,{headers: headers});                               
 
       }
 
